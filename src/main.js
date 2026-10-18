@@ -16,7 +16,7 @@
     canMinHeightPx: 320, // (기본값: topZoneMinPx 80 ÷ topZoneRatio 0.25)
     canBottomRatioPortrait: 0.78, // [결정 필요] 기본값
     canBottomRatioLandscape: 0.82, // [결정 필요] 기본값
-    hudHeightPx: 96, // (기본값: 위 여백 12 + 버튼 72 + 여유 12)
+    hudHeightPx: 120, // (기본값: 위 여백 12 + 그림 버튼 96 + 여유 12)
     crushStages: 5, // [결정 필요] 기본값 5 — art.js는 stage 0..5(5=납작)로 그림
     tapThresholdMs: 250, // [결정 필요] 기본값 250 — 이보다 짧으면 톡
     chargeMaxSec: 1.0, // [결정 필요] 기본값 1.0 — 게이지 가득 차는 시간
@@ -778,7 +778,11 @@
   continueBtn.addEventListener('click', goPlay);
   restartBtn.addEventListener('click', restart);
   pauseBtn.addEventListener('click', () => { openPanel(false); });
-  function renderSound() { soundBtn.textContent = soundOn ? '🔊 소리' : '🔇 조용'; }
+  function renderSound() {
+    soundBtn.classList.toggle('off', !soundOn);
+    soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+    $('soundLbl').textContent = soundOn ? '소리 켬' : '소리 끔';
+  }
   soundBtn.addEventListener('click', () => {
     soundOn = !soundOn; SFX.setOn(soundOn); store.set('sound', soundOn ? 'on' : 'off'); renderSound();
     if (screen === 'play') blurAll();

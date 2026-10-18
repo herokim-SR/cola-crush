@@ -33,13 +33,13 @@
   #bestStart{font-size:30px;font-weight:700;line-height:1.3}
   #bestStart:empty{display:none}
   #pause{position:relative}
-  #pauseBadge{position:absolute;top:-12px;right:-12px;width:40px;height:40px;line-height:34px;font-size:22px;text-align:center;background:#FFD23F;border:3px solid #222;border-radius:50%;pointer-events:none}
-  #toast{position:fixed;left:50%;top:100px;z-index:25;max-width:calc(100vw - 24px);padding:12px 22px;background:#fff;border:4px solid #222;border-radius:24px;font-size:28px;font-weight:800;line-height:1.3;text-align:center;pointer-events:none;box-shadow:0 4px 0 #0003;opacity:0;transform:translate(-50%,-16px);transition:opacity .3s ease,transform .3s ease}
+  #pauseBadge{position:absolute;top:-14px;right:-14px;text-shadow:none;width:40px;height:40px;line-height:34px;font-size:22px;text-align:center;background:#FFD23F;border:3px solid #222;border-radius:50%;pointer-events:none}
+  #toast{position:fixed;left:50%;top:128px;z-index:25;max-width:calc(100vw - 24px);padding:12px 22px;background:#fff;border:4px solid #222;border-radius:24px;font-size:28px;font-weight:800;line-height:1.3;text-align:center;pointer-events:none;box-shadow:0 4px 0 #0003;opacity:0;transform:translate(-50%,-16px);transition:opacity .3s ease,transform .3s ease}
   #toast.show{opacity:1;transform:translate(-50%,0)}
   /* 첫 판 안내 말풍선이 보이는 동안에는 알림을 화면 아래(식탁)로 — 서로 겹치지 않게 */
   #toast.low{top:auto;bottom:16px;transform:translate(-50%,16px)}
   #toast.low.show{transform:translate(-50%,0)}
-  #panel{overflow:auto;touch-action:pan-y;-webkit-overflow-scrolling:touch;background:rgba(191,233,255,.6);padding:100px 12px 24px}
+  #panel{overflow:auto;touch-action:pan-y;-webkit-overflow-scrolling:touch;background:rgba(191,233,255,.6);padding:128px 12px 24px}
   #panel *{touch-action:pan-y}
   .sheet{max-width:760px;margin:0 auto;background:#fff;border-radius:28px;box-shadow:0 6px 0 #0002;padding:20px 18px 28px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
   #hurrayTitle{margin:0;font-size:64px;color:#FF8C1A;text-shadow:0 3px 0 #222}
@@ -58,6 +58,22 @@
   .card .price{font-size:22px;font-weight:800;color:#b25b00;min-height:26px}
   .card .btn{width:100%;min-width:0;min-height:64px;font-size:22px;padding:0 6px}
   .card .btn:disabled{background:#eee;color:#666;box-shadow:none;cursor:default}
+  /* HUD 버튼: 콜라캔 색 타일 + 코드로 그린 큰 그림 + 아래 짧은 글자. 검정 외곽선 4px(게임 그림과 같은 선), 아래 그림자 = 식탁 위 캔 느낌 */
+  .hud{min-width:96px;min-height:96px;padding:6px 10px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:4px solid #1E1E1E;border-radius:22px;color:#fff;font-size:24px;font-weight:900;line-height:1;box-shadow:0 6px 0 #1E1E1E;text-shadow:0 2px 0 #0006;position:relative}
+  .hud:active{transform:translateY(4px);box-shadow:0 2px 0 #1E1E1E}
+  .hud .ico{width:60px;height:54px;display:block;filter:drop-shadow(0 2px 0 #0006)}
+  .hud .ico rect,.hud .ico .spk{fill:#fff;stroke:#1E1E1E;stroke-width:2.5;stroke-linejoin:round}
+  .hud .ico .wave{fill:none;stroke:#fff;stroke-width:4.5;stroke-linecap:round}
+  .hud .ico .cross{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round}
+  .hud::before{content:"";position:absolute;left:10px;right:10px;top:5px;height:6px;border-radius:3px;background:#ffffff55}
+  #pause.hud{background:#E63946}
+  #sound.hud{background:#FF8C1A}
+  #sound.hud.off{background:#1E1E1E;border-color:#1E1E1E;box-shadow:0 6px 0 #555}
+  #sound.hud.off .ico .spk{fill:#fff}#sound.hud.off .ico .cross{stroke:#FF5A5F}
+  #sound .off-ico{display:none}
+  #sound.off .on-ico{display:none}
+  #sound.off .off-ico{display:block}
+  @media (max-width:560px){.hud{min-width:84px;min-height:84px;font-size:20px}.hud .ico{width:50px;height:44px}}
   @media (max-width:560px){.btn{font-size:24px;min-width:80px;padding:0 12px}.big{font-size:32px}#start h1{font-size:48px}#startHint{font-size:24px}#hudLeft{font-size:26px}.card{width:140px}#toast{font-size:22px}}
 </style>
 </head>
@@ -70,8 +86,8 @@
 </div>
 
 <div id="topRight">
-  <button id="pause" class="btn" hidden aria-label="쉬기">⏸ 쉬기<span id="pauseBadge" hidden>🎁</span></button>
-  <button id="sound" class="btn" aria-label="소리 켜기 끄기">🔊 소리</button>
+  <button id="pause" class="btn hud" hidden aria-label="쉬기"><svg class="ico" viewBox="6 5 36 38" aria-hidden="true"><rect x="10" y="8" width="10" height="32" rx="3"/><rect x="28" y="8" width="10" height="32" rx="3"/></svg><span class="lbl">쉬기</span><span id="pauseBadge" hidden>🎁</span></button>
+  <button id="sound" class="btn hud" aria-label="소리 켜기 끄기" aria-pressed="true"><svg class="ico on-ico" viewBox="3 6 42 36" aria-hidden="true"><path class="spk" d="M6 18h8l11-9v30l-11-9H6z"/><path class="wave" d="M31 18q4 6 0 12"/><path class="wave" d="M36 13q8 11 0 22"/></svg><svg class="ico off-ico" viewBox="3 6 42 36" aria-hidden="true"><path class="spk" d="M6 18h8l11-9v30l-11-9H6z"/><path class="cross" d="M31 17l12 14M43 17L31 31"/></svg><span class="lbl" id="soundLbl">소리 켬</span></button>
 </div>
 
 <div id="start" class="overlay">

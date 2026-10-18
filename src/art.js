@@ -35,6 +35,7 @@
       flatMaxH: 0.35,                  // (기본값: 납작 원판 최대 두께 = 캔 폭 × 0.35)
       flatTeeth: 9,                    // (기본값: 납작 원판 윗선 주름 개수)
       badgeMinD: 72,                   // [결정 필요] 기본값 숫자 배지 지름 72px 이상
+      showGradeNumber: false,          // 숫자 배지 끔 — 등급은 색으로만
       badgeRatio: 0.4,                 // (기본값: 배지 지름 = 캔 폭 × 0.4, 216px 캔이면 86px)
     },
 
@@ -230,7 +231,8 @@
       bx = p[0]; by = p[1];
     }
 
-    // 흰 원 배지 + 검정 등급 숫자 (글자 무늬 없음, 숫자만)
+    // 등급 숫자 배지 없음: 등급은 캔 색(빨강·주황·검정)으로만 보여 준다
+    if (ART.can.showGradeNumber) {
     ctx.beginPath();
     ctx.arc(bx, by, D / 2, 0, TAU);
     ctx.fillStyle = '#FFFFFF';
@@ -243,6 +245,7 @@
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(String(grade), bx, by + D * 0.04);
+    }
 
     ctx.restore();
   }
@@ -1106,7 +1109,7 @@
     ctx.restore();
   }
 
-  // ===== 캔 등급 배너 "캔이 더 단단해졌어! [2]" =====
+  // ===== 캔 등급 배너 "캔이 더 단단해졌어!" (숫자 없음, 배너 색 = 새 캔 색) =====
   // cy = 배너 가운데 y. o = { text, grade, color(새 캔 색), fontPx, maxW, scale, alpha }
   function drawBanner(ctx, W, cy, o) {
     o = o || {};
@@ -1118,12 +1121,12 @@
     ctx.font = '900 ' + fs + 'px ' + ART.font;
     let tw = ctx.measureText(text).width;
     const maxW = Math.max(120, num(o.maxW, W - 32));
-    let D = fs * 1.25, total = tw + 16 + D + 56;
+    let D = fs * 1.25, total = tw + 56;
     if (total > maxW) { // 화면 폭 안에 들어가게 글자 크기를 줄임
       const k = maxW / total;
       fs = Math.max(20, Math.floor(fs * k));
       ctx.font = '900 ' + fs + 'px ' + ART.font;
-      tw = ctx.measureText(text).width; D = fs * 1.25; total = tw + 16 + D + 56;
+      tw = ctx.measureText(text).width; D = fs * 1.25; total = tw + 56;
     }
     const bh = Math.max(D + 20, fs * 1.6);
     ctx.globalAlpha = a;
@@ -1136,24 +1139,13 @@
     ctx.lineWidth = 6;
     ctx.strokeStyle = ART.ink;
     ctx.stroke();
-    const tx = -total / 2 + 28 + tw / 2;
+    const tx = 0;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.lineWidth = Math.max(5, fs * 0.2);
     ctx.strokeText(text, tx, fs * 0.04);
     ctx.fillStyle = '#FFFFFF';
     ctx.fillText(text, tx, fs * 0.04);
-    // 숫자 배지 (캔 배지와 같은 모양)
-    const bx = total / 2 - 28 - D / 2;
-    ctx.beginPath();
-    ctx.arc(bx, 0, D / 2, 0, TAU);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fill();
-    ctx.lineWidth = 4;
-    ctx.stroke();
-    ctx.fillStyle = ART.ink;
-    ctx.font = '900 ' + Math.round(D * 0.62) + 'px ' + ART.font;
-    ctx.fillText(String(o.grade == null ? '' : o.grade), bx, D * 0.04);
     ctx.restore();
   }
 
