@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <clipPath id="bg"><rect width="512" height="512" rx="96"/></clipPath>
+    <clipPath id="body"><path d="M120 150 L120 410 A100 26 0 0 0 320 410 L320 150 Z"/></clipPath>
+  </defs>
+  <g clip-path="url(#bg)">
+    <rect width="512" height="512" fill="#BFE9FF"/>
+    <rect y="400" width="512" height="112" fill="#F2C894"/>
+    <path d="M40 450 C140 440 220 462 330 450" fill="none" stroke="#DFA865" stroke-width="7" stroke-linecap="round"/>
+    <path d="M300 484 C380 476 430 490 490 482" fill="none" stroke="#DFA865" stroke-width="7" stroke-linecap="round"/>
+    <line x1="0" y1="400" x2="512" y2="400" stroke="#B9783C" stroke-width="8"/>
+  </g>
+  <ellipse cx="220" cy="440" rx="128" ry="18" fill="#000000" opacity="0.16"/>
+  <path d="M120 150 L120 410 A100 26 0 0 0 320 410 L320 150 Z" fill="#E63946"/>
+  <g clip-path="url(#body)">
+    <path d="M100 250 C160 215 250 290 340 245 L340 300 C250 345 160 268 100 302 Z" fill="#FFFFFF"/>
+    <rect x="146" y="150" width="24" height="270" fill="#FFFFFF" opacity="0.3"/>
+    <path d="M110 392 A110 26 0 0 0 330 392 L330 450 L110 450 Z" fill="#C9D1D9"/>
+    <path d="M110 392 A110 26 0 0 0 330 392" fill="none" stroke="#8C96A0" stroke-width="4"/>
+  </g>
+  <path d="M120 150 L120 410 A100 26 0 0 0 320 410 L320 150 Z" fill="none" stroke="#111111" stroke-width="12" stroke-linejoin="round"/>
+  <ellipse cx="220" cy="150" rx="100" ry="28" fill="#C9D1D9" stroke="#111111" stroke-width="12"/>
+  <ellipse cx="220" cy="150" rx="76" ry="18" fill="none" stroke="#8C96A0" stroke-width="6"/>
+  <ellipse cx="242" cy="148" rx="24" ry="9" fill="none" stroke="#8C96A0" stroke-width="7"/>
+  <circle cx="220" cy="150" r="6" fill="#8C96A0"/>
+  <g stroke="#111111" stroke-width="10" stroke-linecap="round">
+    <line x1="330" y1="92" x2="346" y2="70"/>
+    <line x1="352" y1="114" x2="378" y2="104"/>
+  </g>
+  <g transform="translate(408 128) rotate(25)" stroke="#111111" stroke-linejoin="round">
+    <rect x="34" y="-12" width="56" height="24" rx="12" fill="#FFD23F" stroke-width="9"/>
+    <rect x="-42" y="-34" width="84" height="68" rx="22" fill="#E63946" stroke-width="10"/>
+    <rect x="-42" y="-34" width="84" height="16" rx="8" fill="#FFFFFF" stroke-width="7"/>
+    <rect x="-42" y="18" width="84" height="16" rx="8" fill="#FFFFFF" stroke-width="7"/>
+    <rect x="-30" y="-12" width="24" height="9" rx="4.5" fill="#FFFFFF" opacity="0.4" stroke="none"/>
+  </g>
+</svg>
