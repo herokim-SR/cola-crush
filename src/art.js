@@ -82,7 +82,7 @@
       bit: '#C9D1D9',                  // (기본값: 작은 은색 동그라미)
     },
 
-    pop: { size: 72 },                 // (기본값: "뾅!" 글자 기본 크기 px, scale 1 기준)
+    pop: { size: 72 },                 // (기본값: "뿅!" 글자 기본 크기 px, scale 1 기준)
     hurray: {
       text: '오예!',                   // (아이 요청)
       appearSec: 0.3,                  // (기본값: GAME.md 아트 리스크 5 — 0.3초 커지기)
@@ -977,7 +977,7 @@
     ctx.restore();
   }
 
-  // ===== 만화 글자 "뾅!" "쾅!" "팅" =====
+  // ===== 만화 글자 "뿅!" "쾅!" "팅" =====
   function drawPopText(ctx, x, y, text, scale, alpha) {
     const sc = num(scale, 1), a = clamp(num(alpha, 1), 0, 1);
     if (sc <= 0 || a <= 0 || !text) return;

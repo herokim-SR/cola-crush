@@ -62,7 +62,7 @@
     popOldFadeSec: 0.15, // [결정 필요] 기본값 — 새 글자가 나오면 옛 글자가 사라지는 시간
     popGapPx: 12, // (기본값: index.html 상단 버튼 여백 12px과 같음) 캔·망치 머리와 글자 사이
     popRisePx: 30, // [결정 필요] 기본값 — 글자가 떠오르는 높이 (이전 40)
-    goodPopPx: 84, // [결정 필요] 기본값 — 큰 "뾅!" 글자 (이전 72px보다 크게, 플레이 점검 '크고 읽기 쉬운')
+    goodPopPx: 84, // [결정 필요] 기본값 — 큰 "뿅!" 글자 (이전 72px보다 크게, 플레이 점검 '크고 읽기 쉬운')
     goodSubPx: 30, // (기본값: HUD 점수 글자 30px과 같음) "잘 쳤어!" 글자
     goodHitStars: 3, // [결정 필요] 기본값 — 좋은 타격 때 별 개수
     badPopPx: 44, // [결정 필요] 기본값 — 작은 "팅" 글자
@@ -418,7 +418,7 @@
     const hitY = Math.max(top, Math.min(L.bottomY, y));
     const willFlat = can.hp <= 1e-6; // 납작해지는 한 방은 flatten()의 "쾅"만 낸다(소리 겹침 방지)
     if (zone === 'good') {
-      const pop = { text: charged ? '쾅!' : '뾅!', px: CONFIG.goodPopPx, fill: '#FFD23F', scale: charged ? 1.1 + 0.3 * power : 1,
+      const pop = { text: charged ? '쾅!' : '뿅!', px: CONFIG.goodPopPx, fill: '#FFD23F', scale: charged ? 1.1 + 0.3 * power : 1,
         sub: '잘 쳤어!', subPx: CONFIG.goodSubPx, stars: CONFIG.goodHitStars };
       addPop(x, hitY, pop);
       if (charged) {

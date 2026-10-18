@@ -70,7 +70,7 @@
       try { if (master) master.gain.setValueAtTime(on ? MASTER_VOLUME : 0, ac.currentTime); } catch (e) { /* 무시 */ }
     },
     isOn: function () { return on; },
-    // 톡 = "뾅": 통통 튀는 낮은 하강음 두 번
+    // 톡 = "뿅": 통통 튀는 낮은 하강음 두 번
     boing: function () {
       play(function () {
         tone(420, 150, 0.13, 'triangle', 0.8, 0);
